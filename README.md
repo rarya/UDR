@@ -1,13 +1,11 @@
 
 
-#### This branch now forces both the remote and local sides to use encryption.
+#### This branch forces both the remote and local sides to use encryption.
 
-#### Default behavior: 
-
-##### Local
+##### Local behavior
 If encryption is not enabled, then the user is notified and the transfer proceeds with AES-128.
 
-##### Remote
+##### Remote behavior
 If a remote version attempts to initiate an unencrypted transfer, the local version will warn the remote user, and exit immediately.
 
 
