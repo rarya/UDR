@@ -1,3 +1,13 @@
+
+
+	This branch now forces both the remote and local sides to use encryption. 
+
+	Default behavior: 
+		Local: If encryption is not enabled, then the user is notified
+				 and the transfer proceeds with AES-128
+
+
+
 UDR
 ===
 
