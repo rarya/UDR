@@ -46,8 +46,17 @@ char * get_udr_cmd(UDR_Options * udr_options) {
         strcat(udr_args, udr_options->encryption_type);
         strcat(udr_args, " ");
     }
-    else
-        udr_args[0] = '\0';
+    else {
+	udr_options->encryption = true; 
+	snprintf(udr_options->encryption_type, PATH_MAX, "%s", "aes-128");
+        strcpy(udr_args, "-n ");
+        strcat(udr_args, udr_options->encryption_type);
+        strcat(udr_args, " ");
+
+	fprintf(stderr, "The local version of UDR has been configured to prevent the transfer of unencrypted data.\nProceeding with AES-128 encryption.\n");
+
+
+    }
 
     if (udr_options->verbose)
         strcat(udr_args, "-v");
@@ -102,6 +111,12 @@ int main(int argc, char* argv[]) {
         usage();
 
     if (curr_options.tflag) {
+	if (curr_options.encryption == false){
+
+	    fprintf(stderr, "The remote version of UDR has been configured to prevent the transfer of unencrypted data, please enable encryption '-n'\n");
+	    exit(EXIT_FAILURE);
+	    
+	}
         return run_receiver(&curr_options);
     }//now for server mode
     //else if (curr_options.server) {
